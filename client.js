@@ -1,16 +1,11 @@
-init();
-var count = 0;
 
-//var WebSocket = require('ws');
 var host = window.document.location.host.replace(/:.*/, '');
 var ws = new WebSocket('ws://' + host + ':8080/', ['soap', 'xmpp']);
 ws.onopen = function () {
-    ws.send('something');
+   // ws.send('something');
 };
-ws.onmessage= function (data) {
+ws.onmessage = function (data) {
     console.log('Server:' + data)
-    // flags.binary will be set if a binary data is received
-    // flags.masked will be set if the data was masked
 };
 
 function init() {
@@ -19,13 +14,13 @@ function init() {
         // Listen for the deviceorientation event and handle the raw data
         window.addEventListener('deviceorientation', function (eventData) {
             // gamma is the left-to-right tilt in degrees, where right is positive
-            var tiltLR = eventData.gamma;
+            var tiltLR = eventData.gamma,
 
             // beta is the front-to-back tilt in degrees, where front is positive
-            var tiltFB = eventData.beta;
+            tiltFB = eventData.beta,
 
             // alpha is the compass direction the device is facing in degrees
-            var dir = eventData.alpha
+            dir = eventData.alpha
 
             // call our orientation event handler
             deviceOrientationHandler(tiltLR, tiltFB, dir);
@@ -48,7 +43,14 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
     document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
     document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
     document.getElementById("doDirection").innerHTML = Math.round(dir);
-
+    
+    var msg = {
+        tiltLR: tiltLR,
+        tiltFB: tiltFB,
+        dir: dir
+    };
+    
+    ws.send(JSON.stringify(msg));
 }
 
 function deviceMotionHandler(eventData) {
@@ -83,3 +85,5 @@ function round(val) {
     var amt = 10;
     return Math.round(val * amt) / amt;
 }
+
+init();

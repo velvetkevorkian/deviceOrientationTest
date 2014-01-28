@@ -2,7 +2,8 @@ init();
 var count = 0;
 
 //var WebSocket = require('ws');
-var ws = new WebSocket('ws://192.168.0.12:8080/', ['soap', 'xmpp']);
+var host = window.document.location.host.replace(/:.*/, '');
+var ws = new WebSocket('ws://' + host + ':8080/', ['soap', 'xmpp']);
 ws.onopen = function () {
     ws.send('something');
 };

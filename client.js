@@ -1,8 +1,8 @@
 
 var host = window.document.location.host.replace(/:.*/, '');
-var ws = new WebSocket('ws://' + host + ':8080/');
+var ws = new WebSocket('ws://' + host + ':8887/');
 ws.onopen = function () {
-   ws.send('connected!');
+   //ws.send('connected!');
 };
 ws.onmessage = function (event) {
     console.log(event.data);
@@ -49,8 +49,8 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
         tiltFB: tiltFB,
         dir: dir
     };
-    ws.send('event!');
-    //ws.send(JSON.stringify(msg));
+    //ws.send('event!');
+    ws.send(JSON.stringify(msg));
 }
 
 function deviceMotionHandler(eventData) {

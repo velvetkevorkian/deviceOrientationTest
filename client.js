@@ -2,10 +2,10 @@
 var host = window.document.location.host.replace(/:.*/, '');
 var ws = new WebSocket('ws://' + host + ':8080/', ['soap', 'xmpp']);
 ws.onopen = function () {
-   // ws.send('something');
+   //ws.send('connected!');
 };
-ws.onmessage = function (data) {
-    console.log('Server:' + data)
+ws.onmessage = function (event) {
+    console.log(event.data);
 };
 
 function init() {
@@ -49,7 +49,7 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
         tiltFB: tiltFB,
         dir: dir
     };
-    
+    //ws.send('event!');
     ws.send(JSON.stringify(msg));
 }
 

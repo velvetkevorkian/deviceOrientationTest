@@ -1,6 +1,7 @@
 
 var host = window.document.location.host.replace(/:.*/, '');
 var ws = new WebSocket('ws://' + host + ':8887/');
+var msg = {};
 ws.onopen = function () {
    //ws.send('connected!');
 };
@@ -43,13 +44,9 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
     document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
     document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
     document.getElementById("doDirection").innerHTML = Math.round(dir);
-    
-    var msg = {
-        tiltLR: tiltLR,
-        tiltFB: tiltFB,
-        dir: dir
-    };
-    //ws.send('event!');
+    msg.tiltLR = tiltLR;
+    msg.tiltFB = tiltFB;
+    msg.dir = dir;
     ws.send(JSON.stringify(msg));
 }
 
@@ -63,11 +60,12 @@ function deviceMotionHandler(eventData) {
     info = info.replace("Z", round(acceleration.z));
     document.getElementById("moAccel").innerHTML = info;
 
+    
     // Grab the acceleration including gravity from the results
-    acceleration = eventData.accelerationIncludingGravity;
-    info = xyz.replace("X", round(acceleration.x));
-    info = info.replace("Y", round(acceleration.y));
-    info = info.replace("Z", round(acceleration.z));
+    var accelerationWithGravity = eventData.accelerationIncludingGravity;
+    info = xyz.replace("X", round(accelerationWithGravity.x));
+    info = info.replace("Y", round(accelerationWithGravity.y));
+    info = info.replace("Z", round(accelerationWithGravity.z));
     document.getElementById("moAccelGrav").innerHTML = info;
 
     // Grab the acceleration including gravity from the results
@@ -79,6 +77,26 @@ function deviceMotionHandler(eventData) {
 
     info = eventData.interval;
     document.getElementById("moInterval").innerHTML = info;
+    
+    msg.accelX = acceleration.x;
+    msg.accelY = acceleration.y;
+    msg.accelZ = acceleration.z;
+    
+    msg.gravAccelX = accelerationWithGravity.x;
+    msg.gravAccelY = accelerationWithGravity.y;
+    msg.gravAccelZ = accelerationWithGravity.z;
+    
+    msg.rotationRateX = rotation.alpha;
+    msg.rotationRateY = rotation.beta;
+    msg.rotationRateZ = rotation.gamma;
+    
+    
+//     var msg = {
+//        tiltLR: rotation.alpha,
+//        tiltFB: rotation.beta,
+//        dir: rotation.gamma
+//    };
+//    ws.send(JSON.stringify(msg));
 }
 
 function round(val) {

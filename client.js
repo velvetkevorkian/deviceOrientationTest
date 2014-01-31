@@ -1,9 +1,25 @@
-
 var host = window.document.location.host.replace(/:.*/, '');
 var ws = new WebSocket('ws://' + host + ':8887/');
-var msg = {};
+var msg = {
+    tiltLR: 0,
+    tiltFB: 0,
+    dir: 0,
+
+    accelX: 0,
+    accelY: 0,
+    accelZ: 0,
+
+    gravAccelX: 0,
+    gravAccelY: 0,
+    gravAccelZ: 0,
+
+    rotationRateX: 0,
+    rotationRateY: 0,
+    rotationRateZ: 0
+};
+
 ws.onopen = function () {
-   //ws.send('connected!');
+    //ws.send('connected!');
 };
 ws.onmessage = function (event) {
     console.log(event.data);
@@ -12,19 +28,12 @@ ws.onmessage = function (event) {
 function init() {
     if (window.DeviceOrientationEvent) {
         document.getElementById("doEvent").innerHTML = "DeviceOrientation";
-        // Listen for the deviceorientation event and handle the raw data
         window.addEventListener('deviceorientation', function (eventData) {
-            // gamma is the left-to-right tilt in degrees, where right is positive
             var tiltLR = eventData.gamma,
+                tiltFB = eventData.beta,
+                dir = eventData.alpha
 
-            // beta is the front-to-back tilt in degrees, where front is positive
-            tiltFB = eventData.beta,
-
-            // alpha is the compass direction the device is facing in degrees
-            dir = eventData.alpha
-
-            // call our orientation event handler
-            deviceOrientationHandler(tiltLR, tiltFB, dir);
+                deviceOrientationHandler(tiltLR, tiltFB, dir);
         }, false);
     } else {
         document.getElementById("doEvent").innerHTML = "Not supported on your device or browser.  Sorry."
@@ -53,22 +62,18 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
 function deviceMotionHandler(eventData) {
     var info, xyz = "[X, Y, Z]";
 
-    // Grab the acceleration including gravity from the results
     var acceleration = eventData.acceleration;
     info = xyz.replace("X", round(acceleration.x));
     info = info.replace("Y", round(acceleration.y));
     info = info.replace("Z", round(acceleration.z));
     document.getElementById("moAccel").innerHTML = info;
 
-    
-    // Grab the acceleration including gravity from the results
     var accelerationWithGravity = eventData.accelerationIncludingGravity;
     info = xyz.replace("X", round(accelerationWithGravity.x));
     info = info.replace("Y", round(accelerationWithGravity.y));
     info = info.replace("Z", round(accelerationWithGravity.z));
     document.getElementById("moAccelGrav").innerHTML = info;
 
-    // Grab the acceleration including gravity from the results
     var rotation = eventData.rotationRate;
     info = xyz.replace("X", round(rotation.alpha));
     info = info.replace("Y", round(rotation.beta));
@@ -77,26 +82,20 @@ function deviceMotionHandler(eventData) {
 
     info = eventData.interval;
     document.getElementById("moInterval").innerHTML = info;
-    
+
     msg.accelX = acceleration.x;
     msg.accelY = acceleration.y;
     msg.accelZ = acceleration.z;
-    
+
     msg.gravAccelX = accelerationWithGravity.x;
     msg.gravAccelY = accelerationWithGravity.y;
     msg.gravAccelZ = accelerationWithGravity.z;
-    
+
     msg.rotationRateX = rotation.alpha;
     msg.rotationRateY = rotation.beta;
     msg.rotationRateZ = rotation.gamma;
-    
-    
-//     var msg = {
-//        tiltLR: rotation.alpha,
-//        tiltFB: rotation.beta,
-//        dir: rotation.gamma
-//    };
-//    ws.send(JSON.stringify(msg));
+
+
 }
 
 function round(val) {

@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="client.css">
 </head>
 
-<body class="noWebsockets noDeviceOrientation">
-    <div class="main">
+<body>
+    <p id="websocketWarning" class="warning hide">Websockets not supported.</p>
+    <p id="orientationWarning" class="warning hide">Device orientation API not supported.</p>
+    
+    
+    <div class="main hide">
         <h2>Device Orientation</h2>
         <table>
             <tr>

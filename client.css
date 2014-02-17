@@ -1,0 +1,7 @@
+.hide {
+  opacity: 0; }
+
+.show {
+  display: inherit;
+  transition: opacity 400ms;
+  opacity: 1; }

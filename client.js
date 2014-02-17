@@ -101,13 +101,29 @@ function round(val) {
 }
 
 function checkSupport() {
+    var wsSupport = false,
+        orientationSupport = false;
+    
     var b = document.querySelectorAll('body');
-    if (window.DeviceOrientationEvent) {
-        
-        b[0].classList.remove('noDeviceOrientation');
+    if (window.DeviceOrientationEvent) {  
+        orientationSupport = true;        
     }
+    else{
+        var w = window.querySelector('#orientationWarning');
+        w.classList.remove('hide');
+        w.classList.add('show');
+    }
+    
     if(window.WebSocket) {
-        b[0].classList.remove('noWebsockets');
+        wsSupport = true;
+    }
+    
+    
+    if(wsSupport && orientationSupport) {
+        console.log("This seems to work");
+        var m = document.querySelector('.main');
+        m.classList.remove('hide');
+        m.classList.add('show');
     }
 }
 

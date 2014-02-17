@@ -44,9 +44,6 @@ function init() {
 //    } else {
 //        document.getElementById("dmEvent").innerHTML = "Not supported on your device or browser.  Sorry."
 //    }
-
-
-
 }
 
 function deviceOrientationHandler(tiltLR, tiltFB, dir) {
@@ -103,6 +100,15 @@ function round(val) {
     return Math.round(val * amt) / amt;
 }
 
+function checkSupport() {
+    var body = document.querySelectorAll('body');
+    if (window.DeviceOrientationEvent) {
+        body.classList.remove('.noDeviceOrientation');
+    }
+    if(window.WebSocket) {
+        body.classList.remove('.noWebsockets');
+    }
+}
 
-//checkSupport();
+checkSupport();
 init();

@@ -101,12 +101,13 @@ function round(val) {
 }
 
 function checkSupport() {
-    var body = document.querySelectorAll('body');
+    var b = document.querySelectorAll('body');
     if (window.DeviceOrientationEvent) {
-        body.classList.remove('.noDeviceOrientation');
+        
+        b[0].classList.remove('noDeviceOrientation');
     }
     if(window.WebSocket) {
-        body.classList.remove('.noWebsockets');
+        b[0].classList.remove('noWebsockets');
     }
 }
 

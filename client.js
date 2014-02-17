@@ -14,19 +14,15 @@ ws.onmessage = function (event) {
 };
 
 function init() {
-    if (window.DeviceOrientationEvent) {
-        document.getElementById("doEvent").innerHTML = "DeviceOrientation";
-        window.addEventListener('deviceorientation', function (eventData) {
-            var tiltLR = eventData.gamma,
-                tiltFB = eventData.beta,
-                dir = eventData.alpha
 
-                deviceOrientationHandler(tiltLR, tiltFB, dir);
-        }, false);
-    } else {
-        document.getElementById("doEvent").innerHTML = "Not supported on your device or browser.  Sorry."
-    }
+    document.getElementById("doEvent").innerHTML = "DeviceOrientation";
+    window.addEventListener('deviceorientation', function (eventData) {
+        var tiltLR = eventData.gamma,
+            tiltFB = eventData.beta,
+            dir = eventData.alpha
 
+            deviceOrientationHandler(tiltLR, tiltFB, dir);
+    }, false);
 }
 
 function deviceOrientationHandler(tiltLR, tiltFB, dir) {
@@ -48,23 +44,22 @@ function round(val) {
 function checkSupport() {
     var wsSupport = false,
         orientationSupport = false;
-    
+
     var b = document.querySelectorAll('body');
-    if (window.DeviceOrientationEvent) {  
-        orientationSupport = true;        
-    }
-    else{
+    if (window.DeviceOrientationEvent) {
+        orientationSupport = true;
+    } else {
         var w = window.querySelector('#orientationWarning');
         w.classList.remove('hide');
         w.classList.add('show');
     }
-    
-    if(window.WebSocket) {
+
+    if (window.WebSocket) {
         wsSupport = true;
     }
-    
-    
-    if(wsSupport && orientationSupport) {
+
+
+    if (wsSupport && orientationSupport) {
         var j = document.querySelector('#join');
         j.classList.remove('hide');
         j.classList.add('show');

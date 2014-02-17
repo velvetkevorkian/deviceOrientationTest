@@ -14,7 +14,6 @@ ws.onmessage = function (event) {
 };
 
 function init() {
-
     document.getElementById("doEvent").innerHTML = "DeviceOrientation";
     window.addEventListener('deviceorientation', function (eventData) {
         var tiltLR = eventData.gamma,
@@ -61,10 +60,14 @@ function checkSupport() {
 
     if (wsSupport && orientationSupport) {
         var j = document.querySelector('#join');
+        window.addEventListener(j, function(click){
+            j.preventDefault();
+            init();    
+        });
         j.classList.remove('hide');
         j.classList.add('show');
     }
 }
 
 checkSupport();
-init();
+//init();

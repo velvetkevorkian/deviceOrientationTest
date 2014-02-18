@@ -16,7 +16,6 @@ function init() {
         dir: 0
     };
 
-    //document.getElementById("doEvent").innerHTML = "DeviceOrientation";
     window.addEventListener('deviceorientation', function (eventData) {
         var tiltLR = eventData.gamma,
             tiltFB = eventData.beta,
@@ -27,9 +26,6 @@ function init() {
 }
 
 function deviceOrientationHandler(tiltLR, tiltFB, dir) {
-    //document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
-    //document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
-    //document.getElementById("doDirection").innerHTML = Math.round(dir);
     msg.tiltLR = tiltLR;
     msg.tiltFB = tiltFB;
     msg.dir = dir;
@@ -55,7 +51,6 @@ function checkSupport() {
         orientationSupport = true;
         var w = document.querySelector('#orientationWarning');
         w.classList.add('hide');
-        //w.classList.add('show');
     } else {
         
     }
@@ -81,4 +76,3 @@ function checkSupport() {
 }
 
 checkSupport();
-//init();

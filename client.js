@@ -1,19 +1,21 @@
-var host = window.document.location.host.replace(/:.*/, '');
-var ws = new WebSocket('ws://' + host + ':8887/');
-var msg = {
-    tiltLR: 0,
-    tiltFB: 0,
-    dir: 0
-};
-
-ws.onopen = function () {
-    //ws.send('connected!');
-};
-ws.onmessage = function (event) {
-    console.log(event.data);
-};
+var ws, msg;
 
 function init() {
+    var host = window.document.location.host.replace(/:.*/, '');
+    ws = new WebSocket('ws://' + host + ':8887/');
+
+    ws.onopen = function () {
+        //ws.send('connected!');
+    };
+    ws.onmessage = function (event) {
+        console.log(event.data);
+    };
+    msg = {
+        tiltLR: 0,
+        tiltFB: 0,
+        dir: 0
+    };
+
     document.getElementById("doEvent").innerHTML = "DeviceOrientation";
     window.addEventListener('deviceorientation', function (eventData) {
         var tiltLR = eventData.gamma,
@@ -33,6 +35,8 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
     msg.dir = dir;
     ws.send(JSON.stringify(msg));
 }
+
+
 
 
 function round(val) {
@@ -60,11 +64,11 @@ function checkSupport() {
 
     if (wsSupport && orientationSupport) {
         var j = document.querySelector('#join');
-        window.addEventListener('click', function(e){
+        window.addEventListener('click', function (e) {
             e.preventDefault();
-            console.log("Hello");
-            
-            init();    
+            if(ws === undefined){
+                init();
+            }
         });
         j.classList.remove('hide');
         j.classList.add('show');

@@ -60,8 +60,10 @@ function checkSupport() {
 
     if (wsSupport && orientationSupport) {
         var j = document.querySelector('#join');
-        window.addEventListener(j, function(click){
-            j.preventDefault();
+        window.addEventListener('click', function(e){
+            e.preventDefault();
+            console.log("Hello");
+            
             init();    
         });
         j.classList.remove('hide');

@@ -53,14 +53,17 @@ function checkSupport() {
     var b = document.querySelectorAll('body');
     if (window.DeviceOrientationEvent) {
         orientationSupport = true;
+        var w = document.querySelector('#orientationWarning');
+        w.classList.add('hide');
+        //w.classList.add('show');
     } else {
-        var w = window.querySelector('#orientationWarning');
-        w.classList.remove('hide');
-        w.classList.add('show');
+        
     }
 
     if (window.WebSocket) {
         wsSupport = true;
+        var w = document.querySelector('#websocketWarning');
+        w.classList.add('hide');
     }
 
 

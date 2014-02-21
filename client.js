@@ -9,7 +9,10 @@ function init() {
     };
     ws.onmessage = function (event) {
         console.log(event.data);
+        setColor(event.data);
     };
+    
+    
     msg = {
         tiltLR: 0,
         tiltFB: 0,
@@ -32,6 +35,13 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
     if(ws != undefined) {
         ws.send(JSON.stringify(msg));
     }
+}
+
+function setColor(color){
+    var c = "#" + color;
+    console.log("hello");
+    var b = document.querySelector('body');
+    b.style.backgroundColor = c;
 }
 
 

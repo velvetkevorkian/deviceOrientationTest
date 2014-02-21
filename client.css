@@ -5,4 +5,5 @@
 .show {
   display: inherit;
   transition: opacity 400ms;
-  opacity: 1; }
+  opacity: 1; 
+}

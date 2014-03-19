@@ -6,6 +6,7 @@ function init() {
 
     ws.onopen = function () {
         //ws.send('connected!');
+        playIntro();
     };
     ws.onmessage = function (event) {
         console.log(event.data);
@@ -32,7 +33,7 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
     msg.tiltLR = tiltLR;
     msg.tiltFB = tiltFB;
     msg.dir = dir;
-    if (ws != undefined) {
+    if (ws.readyState === 1) {
         ws.send(JSON.stringify(msg));
     }
 }
@@ -42,6 +43,18 @@ function setColor(color) {
     console.log("hello");
     var b = document.querySelector('body');
     b.style.backgroundColor = c;
+}
+
+function playIntro() {
+    var joinLink = document.querySelector('#join');
+    joinLink.classList.remove('show');
+    joinLink.classList.add('hide');
+
+    
+    
+    var introOne = document.querySelector("#instructionOne");
+    introOne.classList.remove('hide');
+    introOne.classList.add('show');
 }
 
 

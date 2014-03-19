@@ -11,8 +11,8 @@ function init() {
         console.log(event.data);
         setColor(event.data);
     };
-    
-    
+
+
     msg = {
         tiltLR: 0,
         tiltFB: 0,
@@ -32,12 +32,12 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
     msg.tiltLR = tiltLR;
     msg.tiltFB = tiltFB;
     msg.dir = dir;
-    if(ws != undefined) {
+    if (ws != undefined) {
         ws.send(JSON.stringify(msg));
     }
 }
 
-function setColor(color){
+function setColor(color) {
     var c = "#" + color;
     console.log("hello");
     var b = document.querySelector('body');
@@ -61,8 +61,6 @@ function checkSupport() {
         orientationSupport = true;
         var w = document.querySelector('#orientationWarning');
         w.classList.add('hide');
-    } else {
-        
     }
 
     if (window.WebSocket) {
@@ -76,7 +74,7 @@ function checkSupport() {
         var j = document.querySelector('#join');
         window.addEventListener('click', function (e) {
             e.preventDefault();
-            if(ws === undefined){
+            if (ws === undefined) {
                 init();
             }
         });

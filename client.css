@@ -1,9 +1,9 @@
 .hide {
-  display: none;
-  opacity: 0; }
+  opacity: 0;
+  transition: opacity 400ms;
+  -webkit-transition: opacity 400ms; }
 
 .show {
-  display: inherit;
   transition: opacity 400ms;
-  opacity: 1; 
-}
+  -webkit-transition: opacity 400ms;
+  opacity: 1; }

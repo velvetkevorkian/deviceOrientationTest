@@ -50,8 +50,8 @@ function playIntro() {
     joinLink.classList.remove('show');
     joinLink.classList.add('hide');
 
-    
-    
+
+
     var introOne = document.querySelector("#instructionOne");
     introOne.classList.remove('hide');
     introOne.classList.add('show');
@@ -72,14 +72,19 @@ function checkSupport() {
     var b = document.querySelectorAll('body');
     if (window.DeviceOrientationEvent) {
         orientationSupport = true;
+    } else {
         var w = document.querySelector('#orientationWarning');
-        w.classList.add('hide');
+        w.classList.add('show');
+        w.classList.remove('hide');
     }
+
 
     if (window.WebSocket) {
         wsSupport = true;
+    } else {
         var w = document.querySelector('#websocketWarning');
-        w.classList.add('hide');
+        w.classList.add('show');
+        w.classList.remove('hide');
     }
 
 

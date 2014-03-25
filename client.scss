@@ -18,16 +18,46 @@ a{
 }
 
 .hide{
-    //display: none;
     opacity: 0;
     transition: opacity 400ms;
     -webkit-transition: opacity 400ms;
 }
 
 .show{
-    //display: inherit;
     transition: opacity 400ms;
     -webkit-transition: opacity 400ms;
     
     opacity: 1;
 }
+
+.guide{
+    position: absolute;
+}
+    
+
+#up{
+    top: 0;
+    width: 100%;
+}
+
+#left{
+    left: 0;
+    top: 50%;
+    text-align: left;
+}
+
+#right{
+    right: 0;
+    top: 50%;
+    text-align: right;
+}
+
+#down{
+    bottom: 0;
+    width: 100%;
+}
+
+
+
+    
+    

@@ -20,7 +20,8 @@ a:link, a:visited {
   opacity: 1; }
 
 .guide {
-  position: absolute; }
+  position: absolute;
+  background: rgba(20, 20, 20, 0.7); }
 
 #up {
   top: 0;

@@ -41,7 +41,7 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
 function setColor(color) {
     var c = "#" + color;
     console.log("hello");
-    var b = document.querySelector('body');
+    var b = document.querySelector('img');
     b.style.backgroundColor = c;
 }
 

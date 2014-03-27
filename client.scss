@@ -1,6 +1,23 @@
 $textColor: rgba(200, 200, 200, 0.8);
 $backgroundColor: rgb(20, 20, 20);
 
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?-edodjp');
+	src:url('fonts/icomoon.eot?#iefix-edodjp') format('embedded-opentype'),
+		url('fonts/icomoon.woff?-edodjp') format('woff'),
+		url('fonts/icomoon.ttf?-edodjp') format('truetype'),
+		url('fonts/icomoon.svg?-edodjp#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+*{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
 
 
 body{
@@ -16,12 +33,21 @@ p{
     width: 100%;
     text-align: center;
     font-size: 1em;
+    
+    z-index: 100;
+    position: absolute;
+    &:before, &:after{
+        font-family: 'icomoon';
+        font-size: 1.5em;
+        position: relative;
+    }
 }
 
 a{
     &:link, &:visited{
         color: $textColor;
     }
+    
 }
 
 .hide{
@@ -36,30 +62,50 @@ a{
     
     opacity: 1;
 }
-
     
 #tilt{
-    z-index: 100;
-    position: absolute;
-    top: 40%;
+    top: 35%;
     
 }
 
 #thisIsYou{
-    position: absolute;
-    top: 20%;
-    z-index: 100;
+    top: 25%;
+}
+
+#speed{
+    bottom: 2.5em;
+    &:before{
+        top: -8px;
+        left: 35px;
+        content: "\e602";
+    }
+    &:after{
+        top: 25px;
+        left: -35px;
+        content: "\e601";
+    }
+}
+
+#steer{
+    bottom: 0.25em;
+    &:before{
+        top: 8px;
+        content: "\e600";
+    }
+    &:after{
+        top: 8px;
+        content: "\e603";
+    }
+    
 }
 
 img{
+    
     max-width: 100%;
     max-height: 80%;
     opacity: 0.9;
+    display: block;
     margin: 0 auto;
-    padding: 0;
-    position: absolute;
-    top: 0;
-    z-index: 1;
 }
 
 

@@ -76,6 +76,11 @@ a{
     
     opacity: 1;
 }
+
+#join{
+    position: absolute;
+    top: 35%;
+}
     
 #tilt{
     top: 35%;
@@ -89,25 +94,28 @@ a{
 #speed{
     bottom: 2.5em;
     &:before{
-        top: -8px;
-        left: 35px;
         content: "\e602";
+        display: block;
+        width: 100%;
+        margin-bottom: -6px;
     }
     &:after{
-        top: 25px;
-        left: -35px;
         content: "\e601";
+        display: block;
+        width: 100%;
+        margin-bottom: 6px;
     }
 }
 
 #steer{
     bottom: 0.25em;
     &:before{
-        top: 8px;
+        top: 6px;
         content: "\e600";
+        
     }
     &:after{
-        top: 8px;
+        top: 6px;
         content: "\e603";
     }
     
@@ -117,7 +125,7 @@ img{
     
     max-width: 100%;
     max-height: 80%;
-    opacity: 0.9;
+    opacity: 0.7;
     display: block;
     margin: 0 auto;
 }

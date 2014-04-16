@@ -122,6 +122,18 @@ img{
     opacity: 0.7;
     display: block;
     margin: 0 auto;
+   
+   
+}
+
+#bottomImage{
+     -webkit-filter: saturate(2.5);
+    filter: saturate(2.5);
+}
+
+#topImage{
+    opacity: 1;
+    background: transparent;
 }
 
 .left, .right{

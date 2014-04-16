@@ -22,7 +22,8 @@ body {
   margin: 0;
   font-size: 18px;
   font-family: 'exo';
-  overflow: hidden; }
+  overflow: hidden;
+  -webkit-filter: brightness(1.1); }
 
 p {
   width: 100%;
@@ -87,13 +88,17 @@ img {
   display: block;
   margin: 0 auto; }
 
-#bottomImage {
-  -webkit-filter: saturate(2.5);
-  filter: saturate(2.5); }
+.imgHolder {
+  width: 100%;
+  height: 80%;
+  margin: 0 auto;
+  display: block;
+  position: relative; }
 
-#topImage {
-  opacity: 1;
-  background: transparent; }
+#bottomImage {
+  -webkit-filter: saturate(3.5);
+  filter: saturate(3.5);
+  z-index: 2; }
 
 .left, .right {
   width: 100%; }
